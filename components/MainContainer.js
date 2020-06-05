@@ -18,10 +18,11 @@ class MainContainer extends React.Component {
 
     handlePress = () => {
         this.setState(prevState => {
-            const chance = Math.round(Math.random() * 2)
-            const newBean = chance > 0 ? 1 : -1
+            const chance = Math.ceil(Math.random() * 10)
+            const dropped = Math.ceil(Math.random() * prevState.beans)
+            const newBean = chance === 10 ? (prevState.beans - dropped) : (prevState.beans + 1)
             return {
-                beans: (prevState.beans + newBean)
+                beans: newBean
             }
         })
     }
@@ -61,3 +62,8 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
   });
+
+
+//   const preventNegative = num => {
+//       return num < 0 ? 0 : num
+//   }

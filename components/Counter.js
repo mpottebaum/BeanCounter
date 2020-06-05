@@ -16,10 +16,12 @@ export default Counter
 
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute',
-        bottom: 80
+        flex: 3
+        // position: 'absolute',
+        // bottom: 80
     },
     beans: {
-        fontSize: 40
+        fontSize: 40,
+        marginBottom: 60
     }
 })

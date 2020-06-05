@@ -9,7 +9,8 @@ export default Badge
 
 const styles = StyleSheet.create({
     badge: {
-        marginBottom: 100
+        height: 10,
+        flex: 1
     }
 })
 

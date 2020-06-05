@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         position: 'absolute',
-        right: 0
+        right: 0,
+        top: 0
     }
 })

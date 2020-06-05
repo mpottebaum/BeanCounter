@@ -62,8 +62,8 @@ class MainContainer extends React.Component {
                     <View style={styles.container}>
                         <Badge badge={this.state.badge} />
                         <Route exact path='/'>
-                            <StatsSwipe />
                             <Message message={this.state.message} />
+                            <StatsSwipe />
                             <Screen component={<Counter />} componentProps={this.counterProps()} />
                         </Route>
                         <Route path='/stats'>
@@ -79,7 +79,9 @@ export default MainContainer
 
 const styles = StyleSheet.create({
     container: {
-      flex: 3,
+      flex: 1,
+      flexDirection: 'column',
+      top: 100,
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center'

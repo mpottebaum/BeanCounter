@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import CustomButton from './CustomButton'
 
 
-class CounterContainer extends React.Component {
+class MainContainer extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -12,7 +13,7 @@ class CounterContainer extends React.Component {
 
     handlePress = () => {
         this.setState(prevState => {
-            const chance = Math.round(Math.random())
+            const chance = Math.round(Math.random() * 2)
             const newBean = chance > 0 ? 1 : -1
             return {
                 beans: (prevState.beans + newBean)
@@ -23,14 +24,12 @@ class CounterContainer extends React.Component {
     render() {
         return <View style={styles.container}>
                 <Text>Beans: {this.state.beans}</Text>
-                <TouchableOpacity onPress={this.handlePress}>
-                    <Text>Count</Text>
-                </TouchableOpacity>
+                <CustomButton text={'Count'} handlePress={this.handlePress} />
             </View>
     }
 }
 
-export default CounterContainer
+export default MainContainer
 
 const styles = StyleSheet.create({
     container: {

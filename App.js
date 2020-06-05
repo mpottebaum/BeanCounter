@@ -1,8 +1,8 @@
 import React from 'react';
-import CounterContainer from './components/CounterContainer'
+import MainContainer from './components/MainContainer'
 
 export default function App() {
   return (
-    <CounterContainer />
+    <MainContainer />
   );
 }

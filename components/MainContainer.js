@@ -12,7 +12,8 @@ class MainContainer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            beans: 0
+            beans: 0,
+            highestCount: 0
         }
     }
 
@@ -21,8 +22,15 @@ class MainContainer extends React.Component {
             const chance = Math.ceil(Math.random() * 10)
             const dropped = Math.ceil(Math.random() * prevState.beans)
             const newBean = chance === 10 ? (prevState.beans - dropped) : (prevState.beans + 1)
-            return {
-                beans: newBean
+            if(newBean > prevState.highestCount) {
+                return {
+                    beans: newBean,
+                    highestCount: newBean
+                }
+            } else {
+                return {
+                    beans: newBean
+                }
             }
         })
     }
@@ -31,6 +39,13 @@ class MainContainer extends React.Component {
         return {
             beans: this.state.beans,
             handlePress: this.handlePress
+        }
+    }
+
+    statsProps = () => {
+        return {
+            highestCount: this.state.highestCount,
+            beans: this.state.beans
         }
     }
 
@@ -45,7 +60,7 @@ class MainContainer extends React.Component {
                         </Route>
                         <Route path='/stats'>
                             <HomeSwipe />
-                            <Screen component={<Stats />} />
+                            <Screen component={<Stats />} componentProps={this.statsProps()} />
                         </Route>
                     </View>
                 </Router>

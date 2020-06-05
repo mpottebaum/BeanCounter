@@ -5,7 +5,8 @@ import { StyleSheet, Text, View} from 'react-native';
 
 const Stats = props => {
     return <View>
-        <Text>Stats</Text>
+        <Text>Highest Count: {props.componentProps.highestCount}</Text>
+        <Text>Current Beans: {props.componentProps.beans}</Text>
     </View>
 }
 

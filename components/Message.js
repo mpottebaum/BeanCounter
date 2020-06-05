@@ -1,14 +1,25 @@
 import React from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 const Message = props => {
-    return <Text style={styles.message}>{props.message}</Text>
+    return <View style={styles.container}>
+        <Text style={styles.message}>{props.message}</Text>
+    </View>
 }
 
 export default Message
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
+    },
     message: {
-        flex: 1
+        fontSize: 20,
+        textAlign: 'center',
+        backgroundColor: 'black',
+        color: 'red',
+        padding: 15
     }
 })

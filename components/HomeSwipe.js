@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
         flex: 1,
         position: 'absolute',
         right: 0,
-        top: 0
+        bottom: 0
     }
 })

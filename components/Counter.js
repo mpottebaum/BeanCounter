@@ -7,7 +7,7 @@ class Counter extends React.Component {
     render() {
         return <View style={styles.container}>
             <Text style={styles.beans}>Beans: {this.props.componentProps.beans}</Text>
-            <CustomButton text={'Count'} handlePress={this.props.componentProps.handlePress} />
+            <CustomButton text={'COUNT'} handlePress={this.props.componentProps.handlePress} buttonStyle={styles.button} textStyle={styles.buttonText} />
         </View>
     }
 }
@@ -16,12 +16,22 @@ export default Counter
 
 const styles = StyleSheet.create({
     container: {
-        flex: 3
+        flex: 4
         // position: 'absolute',
         // bottom: 80
     },
     beans: {
         fontSize: 40,
-        marginBottom: 60
+        marginBottom: 45,
+        marginTop: 15,
+        textAlign: 'center'
+    },
+    button: {
+        height: 110,
+        borderColor: 'black',
+        borderRadius: 60
+    },
+    buttonText: {
+        fontSize: 50
     }
 })

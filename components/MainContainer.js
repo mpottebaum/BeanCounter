@@ -24,10 +24,10 @@ class MainContainer extends React.Component {
 
     handlePress = () => {
         this.setState(prevState => {
-            const chance = Math.ceil(Math.random() * 10)
+            const chance = Math.ceil(Math.random() * 15)
             const dropped = Math.ceil(Math.random() * prevState.beans)
-            const newBean = chance === 10 ? (prevState.beans - dropped) : (prevState.beans + 1)
-            const streak = chance === 10 ? 0 : (prevState.streak + 1)
+            const newBean = chance === 15 ? (prevState.beans - dropped) : (prevState.beans + 1)
+            const streak = chance === 15 ? 0 : (prevState.streak + 1)
             const highestCount = newBean > prevState.highestCount ? newBean : prevState.highestCount
             const badge = determineBadge(highestCount)
             const message = composeMessage(prevState, chance, newBean, dropped, badge, streak)
@@ -81,8 +81,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       flexDirection: 'column',
-      top: 100,
-      backgroundColor: '#fff',
+      backgroundColor: 'gray',
       alignItems: 'center',
       justifyContent: 'center'
     },
@@ -105,12 +104,16 @@ const styles = StyleSheet.create({
 }
 
   const composeMessage = (prevState, chance, newBean, dropped, badge, streak) => {
-      if(chance === 10 && prevState.beans !== 0) {
+      if(chance === 15 && prevState.beans !== 0) {
           return dropped === 1 ? `Whoops! You dropped a bean!` : `Oh no! You dropped ${dropped} beans!`
       } else if(prevState.badge !== badge) {
-          return 'Great work!'
-      } else if(streak > 5) {
-        return "Now that's what I call bean counting"
+          return 'That is some next level bean work right there'
+      } else if(streak === 30) {
+          return 'Careful with all those beans now, ya hear?'
+      } else if(streak === 15) {
+          return 'Damn fine bean counting'
+      } else if(streak === 5) {
+          return "There it is. Slow and steady now."
       } else {
           return prevState.message
       }

@@ -35,5 +35,5 @@ const styles = StyleSheet.create({
 })
 
 const getButtonText = pathName => {
-    return pathName === '/stats' ? 'HOME' : 'STATS'
+    return pathName === '/stats' ? 'COUNT' : 'STATS'
 }

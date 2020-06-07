@@ -65,7 +65,7 @@ class MainContainer extends React.Component {
     handleBeanSwipe = () => {
         this.setState(prevState => {
             const chance = Math.ceil(Math.random() * 15)
-            const wins = chance === 15 ? prevState.wins : (prevState.wins + 1)
+            const wins = chance === 15 ? (prevState.wins + 1) : prevState.wins
             const beans = Math.ceil(Math.random() * (5 * prevState.beans))
             const newBean = chance === 15 ? (prevState.beans + beans) : (prevState.beans - beans)
             const message = chance === 15 ? `You counted ${beans} beans!` : `You dropped ${beans} beans!`

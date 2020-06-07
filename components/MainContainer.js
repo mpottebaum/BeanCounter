@@ -4,6 +4,7 @@ import { NativeRouter as Router, Route } from "react-router-native"
 import Screen from './Screen'
 import Counter from './Counter'
 import Stats from './Stats'
+import NavBar from './NavBar'
 import StatsSwipe from './StatsSwipe'
 import HomeSwipe from './HomeSwipe'
 import Badge from './Badge'
@@ -45,22 +46,46 @@ class MainContainer extends React.Component {
         })
     }
 
-    handleNavPressIn = () => {
+    handleBeansPressIn = () => {
         this.setState({
             swipeHelp: true
         })
     }
 
-    handleNavPressOut = () => {
+    handleBeansPressOut = () => {
         this.setState({
             swipeHelp: false
+        })
+    }
+
+    handleBeanSwipe = () => {
+        this.setState(prevState => {
+            const chance = Math.ceil(Math.random() * 15)
+            const beans = Math.ceil(Math.random() * (5 * prevState.beans))
+            const newBean = chance === 15 ? (prevState.beans + beans) : (prevState.beans - beans)
+            const message = chance === 15 ? `You counted ${beans} beans!` : `You dropped ${beans} beans!`
+            const streak = chance === 15 ? 0 : (prevState.streak + 1)
+            const longestStreak = streak > prevState.longestStreak ? streak : prevState.longestStreak
+            const highestCount = newBean > prevState.highestCount ? newBean : prevState.highestCount
+            const badge = determineBadge(highestCount)
+            return {
+                beans: newBean,
+                highestCount: highestCount,
+                badge: badge,
+                message: message,
+                streak: streak,
+                longestStreak: longestStreak
+            }
         })
     }
 
     counterProps = () => {
         return {
             beans: this.state.beans,
-            handlePress: this.handlePress
+            handlePress: this.handlePress,
+            handlePressIn: this.handleBeansPressIn,
+            handlePressOut: this.handleBeansPressOut,
+            handleSwipe: this.handleBeanSwipe
         }
     }
 
@@ -88,13 +113,14 @@ class MainContainer extends React.Component {
                         <Badge badge={this.state.badge} />
                         <Route exact path='/'>
                             <Message message={this.state.message} swipeHelp={this.state.swipeHelp}/>
-                            <StatsSwipe handlePressIn={this.handleNavPressIn} handlePressOut={this.handleNavPressOut}/>
+                            {/* <StatsSwipe handlePressIn={this.handleNavPressIn} handlePressOut={this.handleNavPressOut}/> */}
                             <Screen component={<Counter />} componentProps={this.counterProps()} />
                         </Route>
                         <Route path='/stats'>
-                            <HomeSwipe handlePressIn={this.handleNavPressIn} handlePressOut={this.handleNavPressOut} />
+                            {/* <HomeSwipe handlePressIn={this.handleNavPressIn} handlePressOut={this.handleNavPressOut} /> */}
                             <Screen component={<Stats />} componentProps={this.statsProps()} />
                         </Route>
+                        <NavBar background={mainBackground(this.state.badge)}/>
                     </View>
                 </Router>
     }
@@ -138,19 +164,25 @@ const styles = StyleSheet.create({
 }
 
   const composeMessage = (prevState, chance, newBean, dropped, badge, streak) => {
-      if(chance === 15 && prevState.beans !== 0) {
-          return dropped === 1 ? `Whoops! You dropped a bean!` : `Oh no! You dropped ${dropped} beans!`
-      } else if(prevState.badge !== badge) {
-          return 'That is some next level bean work right there'
-      } else if(streak === 30) {
-          return 'Careful with all those beans now'
-      } else if(streak === 15) {
-          return 'Damn fine bean counting'
-      } else if(streak === 5) {
-          return "There it is. Slow and steady now."
-      } else {
-          return prevState.message
-      }
+        if(chance === 15 && prevState.beans !== 0) {
+            return dropped === 1 ? `Whoops! You dropped a bean!` : `You dropped ${dropped} beans!`
+        } else if(prevState.badge !== badge) {
+            return 'That is some next level bean work right there'
+        } else if(streak === 55) {
+            return "I'm beanin' out right now, yo"
+        } else if(streak === 45) {
+            return "Kershnifuls...that's a lot of beans!"
+        } else if(streak === 35) {
+            return 'Whoa, buddy, mind your beans'
+        } else if(streak === 25) {
+            return 'Careful with all those beans now'
+        } else if(streak === 15) {
+            return 'Damn fine bean counting'
+        } else if(streak === 5) {
+            return "There it is...Slow and steady now"
+        } else {
+            return prevState.message
+        }
   }
 
 

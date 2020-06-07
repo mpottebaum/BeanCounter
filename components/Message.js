@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 const Message = props => {
     return <View style={styles.container}>
-        <Text style={styles.message}>{props.swipeHelp ? 'Swipe that button now' : props.message}</Text>
+        <Text style={styles.message}>{props.swipeHelp ? 'Swipe to go big' : props.message}</Text>
     </View>
 }
 

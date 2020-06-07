@@ -5,8 +5,6 @@ import Screen from './Screen'
 import Counter from './Counter'
 import Stats from './Stats'
 import NavBar from './NavBar'
-import StatsSwipe from './StatsSwipe'
-import HomeSwipe from './HomeSwipe'
 import Badge from './Badge'
 import Message from './Message'
 
@@ -64,7 +62,7 @@ class MainContainer extends React.Component {
             const beans = Math.ceil(Math.random() * (5 * prevState.beans))
             const newBean = chance === 15 ? (prevState.beans + beans) : (prevState.beans - beans)
             const message = chance === 15 ? `You counted ${beans} beans!` : `You dropped ${beans} beans!`
-            const streak = chance === 15 ? 0 : (prevState.streak + 1)
+            const streak = chance === 15 ? (prevState.streak + 1) : 0
             const longestStreak = streak > prevState.longestStreak ? streak : prevState.longestStreak
             const highestCount = newBean > prevState.highestCount ? newBean : prevState.highestCount
             const badge = determineBadge(highestCount)

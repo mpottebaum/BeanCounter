@@ -19,7 +19,8 @@ class MainContainer extends React.Component {
             message: 'Count those beans',
             badge: 'Novice',
             streak: 0,
-            longestStreak: 0
+            longestStreak: 0,
+            swipeHelp: false
         }
     }
 
@@ -41,6 +42,18 @@ class MainContainer extends React.Component {
                 streak: streak,
                 longestStreak: longestStreak
             }
+        })
+    }
+
+    handleNavPressIn = () => {
+        this.setState({
+            swipeHelp: true
+        })
+    }
+
+    handleNavPressOut = () => {
+        this.setState({
+            swipeHelp: false
         })
     }
 
@@ -74,12 +87,12 @@ class MainContainer extends React.Component {
                     <View style={this.containerStyle()}>
                         <Badge badge={this.state.badge} />
                         <Route exact path='/'>
-                            <Message message={this.state.message} />
-                            <StatsSwipe />
+                            <Message message={this.state.message} swipeHelp={this.state.swipeHelp}/>
+                            <StatsSwipe handlePressIn={this.handleNavPressIn} handlePressOut={this.handleNavPressOut}/>
                             <Screen component={<Counter />} componentProps={this.counterProps()} />
                         </Route>
                         <Route path='/stats'>
-                            <HomeSwipe />
+                            <HomeSwipe handlePressIn={this.handleNavPressIn} handlePressOut={this.handleNavPressOut} />
                             <Screen component={<Stats />} componentProps={this.statsProps()} />
                         </Route>
                     </View>
@@ -97,13 +110,14 @@ const styles = StyleSheet.create({
     },
   });
 
+
   const determineBadge = highest => {
     if(highest >= 100) {
         return 'The Chosen Bean'
     } else if(highest >= 90) {
-        return 'Bean Lord'
-    } else if(highest >= 80) {
         return 'Laser Bean'
+    } else if(highest >= 80) {
+        return 'Bean Lord'
     } else if(highest >= 70) {
         return 'Demon Sorcerer'
     } else if(highest >= 60) {

@@ -16,7 +16,8 @@ export default Counter
 
 const styles = StyleSheet.create({
     container: {
-        flex: 4
+        flex: 4,
+        zIndex: 1
         // position: 'absolute',
         // bottom: 80
     },

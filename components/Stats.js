@@ -5,8 +5,10 @@ import { StyleSheet, Text, View} from 'react-native';
 
 const Stats = props => {
     return <View style={styles.container}>
-        <Text style={styles.stats}>Highest Count: {props.componentProps.highestCount}</Text>
         <Text style={styles.stats}>Current Beans: {props.componentProps.beans}</Text>
+        <Text style={styles.stats}>Current Streak: {props.componentProps.currentStreak}</Text>
+        <Text style={styles.stats}>Highest Count: {props.componentProps.highestCount}</Text>
+        <Text style={styles.stats}>Longest Streak: {props.componentProps.longestStreak}</Text>
     </View>
 }
 

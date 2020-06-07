@@ -19,12 +19,17 @@ const styles = StyleSheet.create({
     badge: {
         // height: 10,
         fontSize: 50,
-        padding: 10
+        padding: 10,
+        // flex: 1,
+        textAlign: 'center'
     },
     container: {
         flex: 1,
-        marginTop: 100,
-        marginBottom: 20
+        marginTop: 60,
+        marginBottom: 55,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+
     }
 })
 

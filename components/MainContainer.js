@@ -18,7 +18,8 @@ class MainContainer extends React.Component {
             highestCount: 0,
             message: 'Count those beans',
             badge: 'Novice',
-            streak: 0
+            streak: 0,
+            longestStreak: 0
         }
     }
 
@@ -28,6 +29,7 @@ class MainContainer extends React.Component {
             const dropped = Math.ceil(Math.random() * prevState.beans)
             const newBean = chance === 15 ? (prevState.beans - dropped) : (prevState.beans + 1)
             const streak = chance === 15 ? 0 : (prevState.streak + 1)
+            const longestStreak = streak > prevState.longestStreak ? streak : prevState.longestStreak
             const highestCount = newBean > prevState.highestCount ? newBean : prevState.highestCount
             const badge = determineBadge(highestCount)
             const message = composeMessage(prevState, chance, newBean, dropped, badge, streak)
@@ -36,7 +38,8 @@ class MainContainer extends React.Component {
                 highestCount: highestCount,
                 badge: badge,
                 message: message,
-                streak: streak
+                streak: streak,
+                longestStreak: longestStreak
             }
         })
     }
@@ -51,7 +54,9 @@ class MainContainer extends React.Component {
     statsProps = () => {
         return {
             highestCount: this.state.highestCount,
-            beans: this.state.beans
+            beans: this.state.beans,
+            currentStreak: this.state.streak,
+            longestStreak: this.state.longestStreak
         }
     }
 
@@ -87,17 +92,18 @@ export default MainContainer
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center'
     },
   });
 
   const determineBadge = highest => {
-    if(highest >= 90) {
+    if(highest >= 100) {
         return 'The Chosen Bean'
-    } else if(highest >= 80) {
+    } else if(highest >= 90) {
         return 'Bean Lord'
+    } else if(highest >= 80) {
+        return 'Laser Bean'
     } else if(highest >= 70) {
         return 'Demon Sorcerer'
     } else if(highest >= 60) {
@@ -140,6 +146,8 @@ const styles = StyleSheet.create({
             return '#ffffff'
         case 'Bean Lord':
             return '#d169c5'
+        case 'Laser Bean':
+            return '#fabbec'
         case 'Demon Sorcerer':
             return '#000000'
         case 'Dark Wizard':

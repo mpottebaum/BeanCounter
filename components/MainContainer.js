@@ -19,6 +19,9 @@ class MainContainer extends React.Component {
             badge: 'Novice',
             streak: 0,
             longestStreak: 0,
+            wins: 0,
+            counts: 0,
+            gambles: 0,
             swipeHelp: false
         }
     }
@@ -26,6 +29,7 @@ class MainContainer extends React.Component {
     handlePress = () => {
         this.setState(prevState => {
             const chance = Math.ceil(Math.random() * 15)
+            const wins = chance === 15 ? prevState.wins : (prevState.wins + 1)
             const dropped = Math.ceil(Math.random() * prevState.beans)
             const newBean = chance === 15 ? (prevState.beans - dropped) : (prevState.beans + 1)
             const streak = chance === 15 ? 0 : (prevState.streak + 1)
@@ -39,7 +43,9 @@ class MainContainer extends React.Component {
                 badge: badge,
                 message: message,
                 streak: streak,
-                longestStreak: longestStreak
+                longestStreak: longestStreak,
+                wins: wins,
+                counts: (prevState.counts + 1)
             }
         })
     }
@@ -59,6 +65,7 @@ class MainContainer extends React.Component {
     handleBeanSwipe = () => {
         this.setState(prevState => {
             const chance = Math.ceil(Math.random() * 15)
+            const wins = chance === 15 ? prevState.wins : (prevState.wins + 1)
             const beans = Math.ceil(Math.random() * (5 * prevState.beans))
             const newBean = chance === 15 ? (prevState.beans + beans) : (prevState.beans - beans)
             const message = chance === 15 ? `You counted ${beans} beans!` : `You dropped ${beans} beans!`
@@ -72,7 +79,9 @@ class MainContainer extends React.Component {
                 badge: badge,
                 message: message,
                 streak: streak,
-                longestStreak: longestStreak
+                longestStreak: longestStreak,
+                wins: wins,
+                gambles: (prevState.gambles + 1)
             }
         })
     }
@@ -92,7 +101,10 @@ class MainContainer extends React.Component {
             highestCount: this.state.highestCount,
             beans: this.state.beans,
             currentStreak: this.state.streak,
-            longestStreak: this.state.longestStreak
+            longestStreak: this.state.longestStreak,
+            wins: this.state.wins,
+            counts: this.state.counts,
+            gambles: this.state.gambles
         }
     }
 
@@ -111,11 +123,9 @@ class MainContainer extends React.Component {
                         <Badge badge={this.state.badge} />
                         <Route exact path='/'>
                             <Message message={this.state.message} swipeHelp={this.state.swipeHelp}/>
-                            {/* <StatsSwipe handlePressIn={this.handleNavPressIn} handlePressOut={this.handleNavPressOut}/> */}
                             <Screen component={<Counter />} componentProps={this.counterProps()} />
                         </Route>
                         <Route path='/stats'>
-                            {/* <HomeSwipe handlePressIn={this.handleNavPressIn} handlePressOut={this.handleNavPressOut} /> */}
                             <Screen component={<Stats />} componentProps={this.statsProps()} />
                         </Route>
                         <NavBar background={mainBackground(this.state.badge)}/>

@@ -18,7 +18,7 @@ const NavBar = withRouter(props => {
         backgroundColor: props.background
     }
     console.log(buttonStyle)
-    return <View>
+    return <View styles={styles.container}>
         <CustomButton text={buttonText} handlePress={() => onPress(pathName)} buttonStyle={buttonStyle} textStyle={styles.text}/>
     </View>
 })
@@ -28,6 +28,9 @@ export default NavBar
 const styles = StyleSheet.create({
     text: {
         color: 'black'
+    },
+    container: {
+        flex: 1
     }
 })
 

@@ -2,11 +2,11 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 const Badge = props => {
-    const badgeBackground = getBadgeBackground(props.badge)
+    const badgeColor = getBadgeColor(props.badge)
 
     const badgeStyle = {
         ...styles.badge,
-        backgroundColor: badgeBackground
+        color: badgeColor
     }
     return <View style={styles.container}>
         <Text style={badgeStyle}>{props.badge}</Text>
@@ -18,7 +18,6 @@ export default Badge
 const styles = StyleSheet.create({
     badge: {
         // height: 10,
-        color: 'white',
         fontSize: 50,
         padding: 10
     },
@@ -29,22 +28,30 @@ const styles = StyleSheet.create({
     }
 })
 
-const getBadgeBackground = badge => {
-    switch(badge) {
-        case 'Destroyer of Worlds':
-            return 'red'
-        case 'Bean Master':
-            return 'yellow'
-        case 'Expert':
-            return 'blue'
-        case 'Professional':
-            return 'orange'
-        case 'Amateur':
-            return 'green'
-        case 'Novice':
-            return 'gray'
-        default:
-            return 'gray'
-
+const getBadgeColor = badge => {
+    if(badge === 'Dark Wizard' || badge === 'Demon Sorcerer') {
+        return 'white'
+    } else {
+        return 'black'
     }
 }
+
+// const getBadgeBackground = badge => {
+//     switch(badge) {
+//         case 'Destroyer of Worlds':
+//             return 'red'
+//         case 'Bean Master':
+//             return 'yellow'
+//         case 'Expert':
+//             return 'blue'
+//         case 'Professional':
+//             return 'orange'
+//         case 'Amateur':
+//             return 'green'
+//         case 'Novice':
+//             return 'gray'
+//         default:
+//             return 'gray'
+
+//     }
+// }

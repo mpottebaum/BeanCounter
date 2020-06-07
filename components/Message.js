@@ -14,12 +14,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignContent: 'center',
+        alignSelf: 'stretch'
     },
     message: {
         fontSize: 20,
         textAlign: 'center',
         backgroundColor: 'black',
         color: 'red',
-        padding: 15
+        padding: 15,
     }
 })

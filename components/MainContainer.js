@@ -55,11 +55,18 @@ class MainContainer extends React.Component {
         }
     }
 
+    containerStyle = () => {
+        return {
+            ...styles.container,
+            backgroundColor: mainBackground(this.state.badge)
+        }
+    }
+
 
 
     render() {
         return <Router>
-                    <View style={styles.container}>
+                    <View style={this.containerStyle()}>
                         <Badge badge={this.state.badge} />
                         <Route exact path='/'>
                             <Message message={this.state.message} />
@@ -81,20 +88,27 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       flexDirection: 'column',
-      backgroundColor: 'gray',
       alignItems: 'center',
       justifyContent: 'center'
     },
   });
 
   const determineBadge = highest => {
-    if(highest >= 100) {
-        return 'Destroyer of Worlds'
+    if(highest >= 90) {
+        return 'The Chosen Bean'
+    } else if(highest >= 80) {
+        return 'Bean Lord'
     } else if(highest >= 70) {
+        return 'Demon Sorcerer'
+    } else if(highest >= 60) {
+        return 'Dark Wizard'
+    } else if(highest >= 50) {
+        return 'Destroyer of Worlds'
+    } else if(highest >= 40) {
         return 'Bean Master'
-    } else if(highest >= 45) {
+    } else if(highest >= 30) {
         return 'Expert'
-    } else if(highest >= 25) {
+    } else if(highest >= 20) {
         return 'Professional'
     } else if(highest >= 10) {
         return 'Amateur'
@@ -109,7 +123,7 @@ const styles = StyleSheet.create({
       } else if(prevState.badge !== badge) {
           return 'That is some next level bean work right there'
       } else if(streak === 30) {
-          return 'Careful with all those beans now, ya hear?'
+          return 'Careful with all those beans now'
       } else if(streak === 15) {
           return 'Damn fine bean counting'
       } else if(streak === 5) {
@@ -118,3 +132,32 @@ const styles = StyleSheet.create({
           return prevState.message
       }
   }
+
+
+  const mainBackground = badge => {
+    switch(badge) {
+        case 'The Chosen Bean':
+            return '#ffffff'
+        case 'Bean Lord':
+            return '#d169c5'
+        case 'Demon Sorcerer':
+            return '#000000'
+        case 'Dark Wizard':
+            return '#8a1c16'
+        case 'Destroyer of Worlds':
+            return '#f03026'
+        case 'Bean Master':
+            return '#66ffcc'
+        case 'Expert':
+            return '#66adff'
+        case 'Professional':
+            return '#ffde66'
+        case 'Amateur':
+            return '#9cff66'
+        case 'Novice':
+            return '#d6d2c7'
+        default:
+            return '#d6d2c7'
+
+    }
+}

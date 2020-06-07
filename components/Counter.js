@@ -22,9 +22,12 @@ const styles = StyleSheet.create({
     },
     beans: {
         fontSize: 40,
-        marginBottom: 45,
+        marginBottom: 30,
         marginTop: 15,
-        textAlign: 'center'
+        textAlign: 'center',
+        backgroundColor: 'black',
+        color: 'green',
+        padding: 20
     },
     button: {
         height: 110,
